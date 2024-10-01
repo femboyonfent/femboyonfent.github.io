@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinning Cube</title>
+    <style>
+	h1 { text-align: center;
+color: #d02bed
+}
+
+        body { margin: 0 auto;
+background-color: #000000; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <h1> so real! </h1>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let scene, camera, renderer, cube;
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            const geometry = new THREE.BoxGeometry();
+            const material = new THREE.PointsMaterial({ color: 0xFFACF6, size: 0.2 });
+            cube = new THREE.Points(geometry, material);
+            scene.add(cube);
+
+            // Set initial rotation
+            cube.rotation.x = Math.PI / 4; // 45 degrees
+
+            camera.position.z = 5;
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Continuous rotation
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        }
+
+        init();
+    </script>
+</body>
+</html>
